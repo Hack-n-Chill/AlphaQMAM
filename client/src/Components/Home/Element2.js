@@ -33,7 +33,7 @@ const Element2 = () => {
                     <p className={styles.p}>Contact for Help!</p>
                 </div>
             </div>
-            <button className={styles.btn}> Register </button>
+            <button className={styles.btn}> Create Protest </button>
             <br />
             <br />
         </div>
