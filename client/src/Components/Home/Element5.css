@@ -1,0 +1,55 @@
+.Element5{
+margin-top: 20px;
+background-color: #0a2640;
+margin-bottom: 0px;
+}
+.fit{
+    object-fit: contain;
+    width: 60%;
+    border-radius: 10px;
+    padding: 20px;
+}
+.Heading5{
+    color: white;
+    font-weight: bold;
+    font-family: sans-serif;
+    padding-left: 100px;
+    font-size: 40px;
+}
+
+.text5{
+    padding-left: 100px;
+    font-weight: lighter;
+    font-size: 15px;
+    font-family: sans-serif;
+    color: white;
+}
+
+.position5{
+    padding-bottom: 20px;
+    padding-left: 100px;
+}
+.btn5{
+    border-radius: 30px;
+    background-color: aqua;
+    color: #0a2640;
+}
+
+@media only screen and (max-width:600px)
+{
+    .fit{
+        display: none;
+    }
+    .Heading5{
+        padding-left: 0;
+        text-align: center;
+    }
+    .text5{
+        padding-left: 0;
+        text-align: center;
+    }
+    .position5{
+        padding-left: 0;
+        text-align: center;
+    }
+}
