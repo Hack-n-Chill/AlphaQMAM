@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ProtestSchema = new Schema({
-    oragnisation: {
+    organisation: {
         type: String,
         required: true
     },

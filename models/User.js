@@ -15,16 +15,24 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    number: {
+        type: Number,
+        required: true
+    },
     createdProtest: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'Product'
+            protest_id: {
+                type: Schema.Types.ObjectId,
+                ref: 'Protest'
+            }
         }
     ],
     signedupProtest: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'Product'
+            protest_id: {
+                type: Schema.Types.ObjectId,
+                ref: 'Protest'
+            }
         }
     ]
 });
