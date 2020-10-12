@@ -16,20 +16,26 @@ const Register = () => {
                 <form className="col s12 m8 l6 offset-m3 offset-l3">
                     <div className="row">
                         <div className="input-field col s12">
-                            <input id="username" type="text" className="validate" />
+                            <input name="username" type="text" className="validate" />
                             <label for="username">Username</label>
                         </div>
                     </div>
                     <div className="row">
                         <div className="input-field col s12">
-                            <input id="email" type="email" className="validate" />
+                            <input name="email" type="email" className="validate" />
                             <label for="email">Email</label>
                         </div>
                     </div>
                     <div className="row">
                         <div className="input-field col s12">
-                            <input id="password" type="password" className="validate" />
+                            <input name="password" type="password" className="validate" />
                             <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s12">
+                            <input name="number" type="text" className="validate" />
+                            <label for="number">Phone number</label>
                         </div>
                     </div>
                     <div className="input-field col s12">

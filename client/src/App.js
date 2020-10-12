@@ -7,7 +7,7 @@ import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 import Error from './Components/404/404';
 import AllProtest from './Pages/AllProtest';
-
+import Protestform from "./Components/Auth/Protestform";
 
 function App() {
   return (
@@ -19,7 +19,8 @@ function App() {
 
         <Route exact path="/login" component={Login} />
 
-        <Route exact path="/register" component={Register} />
+        <Route exact path="/register" component={Protestform} />
+        <Route exact path="/signup" component={Register} />
 
         <Route exact path="/all-protests" component={AllProtest} />
 
