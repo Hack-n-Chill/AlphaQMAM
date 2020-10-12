@@ -6,7 +6,7 @@ import Navbar from './Components/Navbar/Navbar';
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 import Error from './Components/404/404';
-import Dashboard from './Pages/Dashboard';
+import AllProtest from './Pages/AllProtest';
 
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
 
         <Route exact path="/register" component={Register} />
 
-        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/all-protests" component={AllProtest} />
 
         <Route component={Error} />
 

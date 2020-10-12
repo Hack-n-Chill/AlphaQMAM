@@ -19,7 +19,7 @@ const Navbar = () => {
 
 
                         {/* All protests */}
-                        <li><Link to="/protests"><span style={{ color: 'black' }}>All Protests</span></Link></li>
+                        <li><Link to="/all-protests"><span style={{ color: 'black' }}>All Protests</span></Link></li>
 
                         {/* Signed-up protests */}
                         <li><Link to="/protests/:userId"><span style={{ color: 'black' }}>My Protests</span></Link></li>
