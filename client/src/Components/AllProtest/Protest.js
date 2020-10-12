@@ -53,6 +53,7 @@ const Protest = () => {
                         return (
 
                             <div class="row">
+                                <h1 style={{ marginLeft: '45%', marginBottom: '5%' }}>Raise Your Voice and Awareness</h1>
                                 <div class="col s12 offset-m3 m6">
                                     <div class="card blue-grey darken-1">
                                         <div class="card-content white-text">
