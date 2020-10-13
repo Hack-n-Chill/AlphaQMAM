@@ -22,8 +22,13 @@ function App() {
 
         <Route exact path="/login" component={Login} />
 
+<<<<<<< HEAD
         {/* k<Route exact path="/register" component={Protestform} /> */}
         <PrivateRoute exact path="/createprotest">
+=======
+
+        <PrivateRoute exact path="/register">
+>>>>>>> navbar auth links
           <Protestform />
         </PrivateRoute>
 

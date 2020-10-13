@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import M from 'materialize-css';
 
+
 const Navbar = () => {
+    const isAuth = useSelector(state => state.auth.isAuth);
     useEffect(() => {
         var elems = document.querySelectorAll('.sidenav');
         M.Sidenav.init(elems);
@@ -29,30 +32,62 @@ const Navbar = () => {
                         <li><Link to="/all-protests"><span style={{ color: 'black' }}>All Protests</span></Link></li>
 
                         {/* Signed-up protests */}
-                        <li><Link to="/protests/:userId"><span style={{ color: 'black' }}>My Protests</span></Link></li>
+                        {isAuth && (
+
+                            <li><Link to="/protests/:userId"><span style={{ color: 'black' }}>My Protests</span></Link></li>
+
+                        )}
 
                         {/* Login users */}
-                        <li><Link to="/login"><span style={{ color: 'black' }}>Login</span></Link></li>
+                        {!isAuth && (
+
+                            <li><Link to="/login"><span style={{ color: 'black' }}>Login</span></Link></li>
+                        )}
 
                         {/* Sign-up new users */}
-                        <li><Link to="/signup"><span style={{ color: 'black' }}>Signup</span></Link></li>
+                        {!isAuth && (
+
+                            <li><Link to="/signup"><span style={{ color: 'black' }}>Signup</span></Link></li>
+                        )}
 
                         {/* Register protests */}
-                        <li><Link to="/createprotest"><span style={{ color: 'black' }}>Create</span></Link></li>
+
+                        {isAuth && (
+
+                            <li><Link to="/createprotest"><span style={{ color: 'black' }}>Create</span></Link></li>
+                        )}
 
                         {/* Logout users */}
-                        <li><Link to="/logout"><span style={{ color: 'black' }}>Logout</span></Link></li>
+                        {isAuth && (
+
+                            <li><Link to="/logout"><span style={{ color: 'black' }}>Logout</span></Link></li>
+                        )}
                     </ul>
                 </div>
             </nav>
 
             <ul className="sidenav" id="mobile-demo">
                 <li><Link to="/all-protests">All Protests</Link></li>
-                <li><Link to="/protest/:userId">All Protests</Link></li>
-                <li><Link to="/login">Login</Link></li>
-                <li><Link to="/register">Register</Link></li>
-                <li><Link to="/dashboard"><span style={{ color: 'black' }}>Dashboard</span></Link></li>
-                <li><Link to="/logout" onClick={logoutHandler}><span style={{ color: 'black' }}>Logout</span></Link></li>
+                {isAuth && (
+
+                    <li><Link to="/protest/:userId">My Protests</Link></li>
+                )}
+                {!isAuth && (
+
+                    <li><Link to="/login">Login</Link></li>
+                )}
+                {!isAuth && (
+
+                    <li><Link to="/signup">Signup</Link></li>
+                )}
+                {isAuth && (
+
+                    <li><Link to="/createprotest">Create</Link></li>
+                )}
+                {isAuth && (
+
+                    <li><Link to="/logout"><span style={{ color: 'black' }}>Logout</span></Link></li>
+                )}
 
             </ul>
         </div>
