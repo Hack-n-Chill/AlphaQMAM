@@ -5,7 +5,7 @@ import { CHANGE_LOADING_DESC, CHANGE_LOADING_UPD, CHANGE_LOADING_SP } from '../A
 const initialState = {
     descLoading: true,
     updateLoading: true,
-    singleProtestLoading: false
+    singleProtestLoading: true,
 };
 
 const loading = (state = initialState, action) => {

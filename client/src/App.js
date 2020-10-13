@@ -9,6 +9,7 @@ import Error from './Components/404/404';
 import AllProtest from './Pages/AllProtest';
 import Protestform from "./Components/Auth/Protestform";
 import SingleProtest from './Pages/SingleProtest';
+import PrivateRoute from './Components/PrivateRoute';
 
 
 function App() {
@@ -21,12 +22,19 @@ function App() {
 
         <Route exact path="/login" component={Login} />
 
-        <Route exact path="/createprotest" component={Protestform} />
+        {/* k<Route exact path="/register" component={Protestform} /> */}
+        <PrivateRoute exact path="/createprotest">
+          <Protestform />
+        </PrivateRoute>
+
         <Route exact path="/signup" component={Register} />
 
         <Route exact path="/all-protests" component={AllProtest} />
 
-        <Route exact path="/protest/:protestId" component={SingleProtest} />
+        <PrivateRoute exact path="/protest/:protestId">
+          <SingleProtest />
+        </PrivateRoute>
+
 
         <Route component={Error} />
 

@@ -8,14 +8,14 @@ const Navbar = () => {
         M.Sidenav.init(elems);
 
     }, []);
-    logoutHandler = () => {
+    const logoutHandler = () => {
         localStorage.removeItem('present');
         localStorage.removeItem('isAuth');
         localStorage.removeItem('token');
         localStorage.removeItem('protestId');
         localStorage.removeItem('userId');
         localStorage.removeItem('userName');
-      };
+    };
     return (
         <div>
             <nav>

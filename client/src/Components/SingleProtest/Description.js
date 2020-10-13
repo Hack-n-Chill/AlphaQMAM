@@ -35,7 +35,7 @@ const Description = (props) => {
         //     });
         setTimeout(() => {
             dispatch({ type: CHANGE_LOADING_DESC, payload: { desc: false, sp: false } });
-        }, 1000);
+        }, 2000);
     }, []);
     return (
         <Fragment>
