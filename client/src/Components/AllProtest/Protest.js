@@ -35,14 +35,14 @@ const Protest = () => {
         <Fragment>
 
             {loading && (
-                <div style={{ marginLeft: '43%', marginTop: '17%' }} class="preloader-wrapper big active">
-                    <div class="spinner-layer spinner-blue-only">
-                        <div class="circle-clipper left">
-                            <div class="circle"></div>
-                        </div><div class="gap-patch">
-                            <div class="circle"></div>
-                        </div><div class="circle-clipper right">
-                            <div class="circle"></div>
+                <div style={{ marginLeft: '43%', marginTop: '17%' }} className="preloader-wrapper big active">
+                    <div className="spinner-layer spinner-blue-only">
+                        <div className="circle-clipper left">
+                            <div className="circle"></div>
+                        </div><div className="gap-patch">
+                            <div className="circle"></div>
+                        </div><div className="circle-clipper right">
+                            <div className="circle"></div>
                         </div>
                     </div>
                 </div>
@@ -52,14 +52,15 @@ const Protest = () => {
                     {protests.map(protest => {
                         return (
 
-                            <div class="row">
-                                <div class="col s12 offset-m3 m6">
-                                    <div class="card blue-grey darken-1">
-                                        <div class="card-content white-text">
-                                            <span class="card-title">{protest.Title}</span>
+                            <div className="row">
+                                <h1 style={{ marginLeft: '45%', marginBottom: '5%' }}>Raise Your Voice and Awareness</h1>
+                                <div className="col s12 offset-m3 m6">
+                                    <div className="card blue-grey darken-1">
+                                        <div className="card-content white-text">
+                                            <span className="card-title">{protest.Title}</span>
                                             <p>{protest.description}</p>
                                         </div>
-                                        <div class="card-action">
+                                        <div className="card-action">
                                             <Link to={`/lists/${protest._id}`} >Know More</Link>
 
                                         </div>
