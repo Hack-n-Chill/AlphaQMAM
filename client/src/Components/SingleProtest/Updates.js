@@ -1,23 +1,27 @@
 import React, { useEffect, Fragment } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { CHANGE_LOADING_UPD } from '../../Actions/Types';
 
-const Updates = () => {
-    const dispatch = useDispatch();
-    const loading = useSelector(state => state.loading);
+const Updates = (props) => {
 
-    useEffect(() => {
-        // effect
-        setTimeout(() => {
-            dispatch({ type: CHANGE_LOADING_UPD, payload: { up: false, sp: false } });
-        }, 1000);
-
-    }, []);
     return (
         <Fragment>
 
-            <div>world</div>
+
+            <div className="container" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
+                <h4>Updates</h4>
+                <Link to="/" style={{ alignItems: 'right' }}>+ Add Update</Link>
+            </div>
+            {props.updates.map(upd => {
+                return (
+                    <div className="container" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
+                        <h5>{upd.title}</h5>
+                        <p>{upd.description}</p>
+                        <h6>{upd.username}</h6>
+                        <hr />
+                    </div>
+                );
+            })}
 
         </Fragment>
     );

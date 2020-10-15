@@ -1,10 +1,10 @@
 import { CHANGE_LOGIN_STATUS } from '../Actions/Types';
 
 const initialState = {
-    isAuth: false,
-    token: null,
-    userId: null,
-    userName: ''
+    isAuth: localStorage.getItem('isAuth') || false,
+    token: localStorage.getItem('token') || null,
+    userId: localStorage.getItem('userId') || null,
+    userName: localStorage.getItem('userName') || ''
 };
 
 const auth = (state = initialState, action) => {

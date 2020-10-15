@@ -13,7 +13,7 @@ const loading = (state = initialState, action) => {
         case CHANGE_LOADING_SP:
             return {
                 ...state,
-                singleProtestLoading: true,
+                singleProtestLoading: false,
             };
         case CHANGE_LOADING_UPD:
             return {

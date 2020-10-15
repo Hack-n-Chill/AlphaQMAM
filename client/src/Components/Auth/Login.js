@@ -33,6 +33,7 @@ const Login = () => {
     const loginHandler = (e) => {
         e.preventDefault();
 
+
         if (!formEnabled) return;
 
         setformEnabled(false);
@@ -54,11 +55,13 @@ const Login = () => {
                     setPasswordErr(true);
                     setformEnabled(true);
                     setErrorMessage("password incorect");
+
                 }
                 else if (res.status === 404) {
                     setEmailErr(true);
                     setformEnabled(true);
                     setErrorMessage("email does not exist");
+
                 }
                 else if (res.status === 400) {
                     setformEnabled(true);
@@ -83,11 +86,16 @@ const Login = () => {
                         userName: resData.user.userName
                     }
                 });
+                localStorage.setItem('token', resData.token);
+                localStorage.setItem('isAuth', true);
+                localStorage.setItem('userId', resData.user.userId);
+                localStorage.setItem('userName', resData.user.userName);
                 history.replace(prevPath);
 
             })
             .catch(err => {
                 setformEnabled(true);
+                setErrorMessage("Server Error try after sometime");
                 dispatch({
                     type: CHANGE_LOGIN_STATUS,
                     payload: {
@@ -140,6 +148,10 @@ const Login = () => {
 
                 </form>
             </div>
+            {errorMessage && (
+                <h6>{errorMessage}</h6>
+            )}
+
             {(prevPath !== '/') && (
                 <h6 style={{ paddingTop: '2%' }}>Login/Signup to continue</h6>
             )}
