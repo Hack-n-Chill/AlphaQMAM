@@ -19,7 +19,7 @@ const Navbar = () => {
 
 
                         {/* All protests */}
-                        <li><Link to="/protests"><span style={{ color: 'black' }}>All Protests</span></Link></li>
+                        <li><Link to="/all-protests"><span style={{ color: 'black' }}>All Protests</span></Link></li>
 
                         {/* Signed-up protests */}
                         <li><Link to="/protests/:userId"><span style={{ color: 'black' }}>My Protests</span></Link></li>
@@ -40,10 +40,11 @@ const Navbar = () => {
             </nav>
 
             <ul className="sidenav" id="mobile-demo">
-                <li><Link to="/course">Courses</Link></li>
+                <li><Link to="/all-protests">All Protests</Link></li>
+                <li><Link to="/protest/:userId">All Protests</Link></li>
                 <li><Link to="/login">Login</Link></li>
-                <li><Link to="/register">Register</Link></li>
-                <li><Link to="/dashboard"><span style={{ color: 'black' }}>Dashboard</span></Link></li>
+                <li><Link to="/signup">Signup</Link></li>
+                <li><Link to="/register">Create</Link></li>
                 <li><Link to="/logout"><span style={{ color: 'black' }}>Logout</span></Link></li>
 
             </ul>
