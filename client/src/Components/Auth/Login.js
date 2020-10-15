@@ -17,7 +17,6 @@ const Login = () => {
     const [formEnabled, setformEnabled] = useState(true);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loginMessage, setLoginMessage] = useState("");
     const history = useHistory();
     const location = useLocation();
 
@@ -39,6 +38,7 @@ const Login = () => {
         setformEnabled(false);
         setEmailErr(false);
         setPasswordErr(false);
+        setErrorMessage("");
 
         fetch('http://localhost:5000/login', {
             method: 'POST',

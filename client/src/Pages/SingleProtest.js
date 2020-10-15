@@ -59,7 +59,7 @@ const SingleProtest = () => {
     const changeSignup = (val) => {
         setSignup(val);
         setsCount(sCount + 1);
-        fetch('http://localhost:5000/signup' + protestId)
+        fetch('http://localhost:5000/signup/' + protestId)
             .then(res => {
 
             })
@@ -73,7 +73,7 @@ const SingleProtest = () => {
         if (!signup) {
             setSignup(true);
             setsCount(sCount + 1);
-            fetch('http://localhost:5000/signup' + protestId)
+            fetch('http://localhost:5000/signup/' + protestId)
                 .then(res => {
 
                 })
@@ -86,7 +86,7 @@ const SingleProtest = () => {
         }
         setPresent(true);
         setpCount(pCount + 1);
-        fetch('http://localhost:5000/present' + protestId)
+        fetch('http://localhost:5000/present/' + protestId)
             .then(res => {
                 localStorage.setItem('protestId', protestId);
                 localStorage.setItem('present', true);
@@ -140,8 +140,9 @@ const SingleProtest = () => {
 
                                     <Updates
                                         updates={updates}
+                                        protestId={protestId}
                                     /> :
-                                    <h5 style={{ marginLeft: '45%' }}>Signup to get Updates</h5>
+                                    <h5 className="container center">Signup to get Updates</h5>
                                 }
                             </div>
                     }
