@@ -6,9 +6,9 @@ import "react-datetime/css/react-datetime.css";
 import Datetime from 'react-datetime';
  
 const Protestform = () => {
-  const [organisationName, setOrganisationName] = useState();
+  const [organisation, setOrganisationName] = useState();
   const [title, setTitle] = useState();
-  const [desciption, setDesciption] = useState();
+  const [description, setDescription] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [location, setLocation] = useState();
@@ -19,7 +19,7 @@ const Protestform = () => {
   const handleSubmit = (e)=> {
     var startTime=startDate+" "+sTime;
     var endTime=endDate+" "+eTime;
-    const protestDetails = { organisationName,  title, location, desciption ,startTime,endTime};
+    const protestDetails = { organisation,  title, location, description ,startTime,endTime};
       e.preventDefault();
       console.log(protestDetails);
       fetch('http://localhost:5000/createprotest', {
@@ -53,13 +53,13 @@ const Protestform = () => {
               {/* taking organisation name  input  */}
               <input
                 name="organisationName"
-                value={organisationName ||''}
+                value={organisation ||''}
                 onChange={(e) => setOrganisationName(e.target.value)}
                 type="text"
                 className="validate"
                 required
               />
-              <label htmlFor="organisationName">Organisation Name</label>
+              <label htmlFor="organisation">Organisation Name</label>
             </div>
           </div>
           <div className="row">
@@ -80,14 +80,14 @@ const Protestform = () => {
             <div className="input-field col s12">
               {/* taking description input  */}
               <input
-                name="desciption"
+                name="description"
                 type="text"
-                value={desciption ||''}
-                onChange={(e) => setDesciption(e.target.value)}
+                value={description ||''}
+                onChange={(e) => setDescription(e.target.value)}
                 className="validate"
                 required
               />
-              <label htmlFor="desciption">Desciption</label>
+              <label htmlFor="desciption">Description</label>
             </div>
           </div>
           <div className="row">
