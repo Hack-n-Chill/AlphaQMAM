@@ -1,11 +1,12 @@
 const express = require('express');
-const router = express.Router();
 const GlobalController = require('../controllers/global');
 
 
-router.route('/signup').post(GlobalController.registerUser);
-router.route('/login').post(GlobalController.login);
-router.route('/all-protests').get(GlobalController.getProtests);
-router.route('/protest/:protestId').get(GlobalController.getProtest);
+const router = express.Router();
+
+
+router.route('/signup').post(GlobalController.registerUser);//Sign up for user 
+router.route('/login').post(GlobalController.login);//Login for user
+router.route('/all-protests').get(GlobalController.getProtests);//Get all protests
 
 module.exports = router;

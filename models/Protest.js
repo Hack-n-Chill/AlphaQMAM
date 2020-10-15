@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./User');
 
 const Schema = mongoose.Schema;
 
@@ -18,7 +19,11 @@ const ProtestSchema = new Schema({
         type: String,
         required: true
     },
-    date: {
+    startTime: {
+        type: Date,
+        required: true
+    },
+    endTime: {
         type: Date,
         required: true
     },
@@ -29,10 +34,21 @@ const ProtestSchema = new Schema({
     },
     signedupUser: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
+            user_id: {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        }
+    ],
+    presentUser: [
+        {
+            user_id: {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
         }
     ]
+
 });
 
 module.exports = mongoose.model('Protest', ProtestSchema);

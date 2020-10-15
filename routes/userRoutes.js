@@ -1,10 +1,13 @@
 const express = require('express');
-const router = require('./publicRoutes');
-const roter = express.Router();
 const UserController = require('../controllers/user');
+const isAuth = require('../middleware/auth');
 
-router.route('/createprotest').post(UserController.createProtest);
-router.route('/myprotests/:userId').get(UserController.myProtests);
+
+const router = express.Router();
+
+
+router.route('/createprotest').post(isAuth, UserController.createProtest);//allow creating of protest
+router.route('/myprotests/:userId').get(isAuth, UserController.myProtests);//Get all protest created by User
 
 
 module.exports = router;
