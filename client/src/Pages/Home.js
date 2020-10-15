@@ -10,7 +10,7 @@ const Home = () => {
             <Element3 />
             <Element4 />
             <Footer />
-
+            
         </React.Fragment>
     );
 };
