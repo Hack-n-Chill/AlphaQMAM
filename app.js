@@ -20,7 +20,7 @@ app.use('/protest', protestRoutes);
 app.use('/help', twilioRoutes);
 app.use('/', globalRoutes);
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
     .then(result => {
         console.log("Connected");
         app.listen(5000);

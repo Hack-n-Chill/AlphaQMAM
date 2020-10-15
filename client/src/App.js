@@ -21,7 +21,7 @@ function App() {
 
         <Route exact path="/login" component={Login} />
 
-        <Route exact path="/register" component={Protestform} />
+        <Route exact path="/createprotest" component={Protestform} />
         <Route exact path="/signup" component={Register} />
 
         <Route exact path="/all-protests" component={AllProtest} />

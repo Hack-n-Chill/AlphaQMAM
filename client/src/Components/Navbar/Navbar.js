@@ -31,7 +31,7 @@ const Navbar = () => {
                         <li><Link to="/signup"><span style={{ color: 'black' }}>Signup</span></Link></li>
 
                         {/* Register protests */}
-                        <li><Link to="/register"><span style={{ color: 'black' }}>Create</span></Link></li>
+                        <li><Link to="/createprotest"><span style={{ color: 'black' }}>Create</span></Link></li>
 
                         {/* Logout users */}
                         <li><Link to="/logout"><span style={{ color: 'black' }}>Logout</span></Link></li>
