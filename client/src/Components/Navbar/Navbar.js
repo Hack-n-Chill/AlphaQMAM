@@ -6,6 +6,8 @@ import M from 'materialize-css';
 
 const Navbar = () => {
     const isAuth = useSelector(state => state.auth.isAuth);
+    const present = localStorage.getItem('present') || false;
+    const protestId = localStorage.getItem('protestId') || null;
     useEffect(() => {
         var elems = document.querySelectorAll('.sidenav');
         M.Sidenav.init(elems);
@@ -26,7 +28,8 @@ const Navbar = () => {
                     <a href="/" className="brand-logo"><span style={{ color: 'black', marginLeft: '5px' }}>Codemon</span></a>
                     <a href="/" data-target="mobile-demo" className="sidenav-trigger "><i className="material-icons"><span style={{ color: 'black' }}>menu</span></i></a>
                     <ul className="right hide-on-med-and-down">
-
+                        {/* Help Button  */}
+                        <li> <button ></button> </li>
 
                         {/* All protests */}
                         <li><Link to="/all-protests"><span style={{ color: 'black' }}>All Protests</span></Link></li>
