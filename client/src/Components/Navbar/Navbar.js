@@ -4,11 +4,15 @@ import { Link, useHistory } from 'react-router-dom';
 import M from 'materialize-css';
 
 import { CHANGE_LOGIN_STATUS } from '../../Actions/Types';
+import styles from './Navbar.module.css';
+import { TokenExpiredError } from 'jsonwebtoken';
 
 
 const Navbar = () => {
     const dispatch = useDispatch();
     const isAuth = useSelector(state => state.auth.isAuth);
+    const token = useSelector(state => state.auth.token);
+
     const userId = useSelector(state => state.auth.userId);
     const present = localStorage.getItem('present') || false;
     const protestId = localStorage.getItem('protestId') || null;
@@ -18,6 +22,19 @@ const Navbar = () => {
         M.Sidenav.init(elems);
 
     }, []);
+    const helptHndler = () => {
+        fetch('http://localhost:5000/help/twilio' + protestId, {
+            headers: {
+                Authorization: 'Bearer ' + TokenExpiredError
+            }
+        })
+            .then(res => {
+                alert('Help message seent');
+            })
+            .catch(err => {
+                alert('error occured');
+            });
+    };
     const logoutHandler = () => {
         dispatch({
             type: CHANGE_LOGIN_STATUS,
@@ -45,7 +62,10 @@ const Navbar = () => {
                     <a href="/" data-target="mobile-demo" className="sidenav-trigger "><i className="material-icons"><span style={{ color: 'black' }}>menu</span></i></a>
                     <ul className="right hide-on-med-and-down">
                         {/* Help Button  */}
-                        <li> <button >Help</button> </li>
+                        {(isAuth && present) && (
+                            <li><Link><button onClick={helptHndler} className={styles.btn}>Help</button></Link> </li>
+
+                        )}
 
                         {/* All protests */}
                         <li ><Link to="/all-protests"><span style={{ color: 'black' }}>All Protests</span></Link></li>
@@ -86,6 +106,10 @@ const Navbar = () => {
             </nav>
 
             <ul className="sidenav" id="mobile-demo">
+                {(isAuth && present) && (
+                    <li><button onClick={helptHndler} className={styles.btn}>Help</button> </li>
+
+                )}
                 <li><Link to="/all-protests">All Protests</Link></li>
                 {isAuth && (
 
