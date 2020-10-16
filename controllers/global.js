@@ -1,16 +1,12 @@
 const express = require('express');
 const User = require('../models/User');
 const Protest = require('../models/Protest');
-const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { createProtest } = require('./user');
-const emailValidator = require('../validation/email');
 const passwordValidator = require('../validation/password');
 
 
 
-//TODO:Add validation and errors
 
 //POST: creating user with data passed in signup form
 exports.registerUser = (req, res, next) => {
@@ -46,7 +42,7 @@ exports.registerUser = (req, res, next) => {
         res.status(200).send({ msg: "Created" });
     })
         .catch(err => {
-            console.log(err);
+            res.status(500).send('Internal server error');
         });
 };
 //POST:Logging in with data
@@ -75,13 +71,14 @@ exports.login = (req, res, next) => {
                 { expiresIn: '24h' }
             );
             res.status(200).json({ token: token, userId: loadedUser._id.toString(), username: loadedUser.name });
-        }).catch(err => console.log(err));
+        }).catch(err => res.status(500).send('Internal server error'));
+    ;
 };
 //GET: To get all the protests
 exports.getProtests = (req, res, next) => {
-    Protest.find()
+    Protest.find({ endTime: { $gt: Date.now() } }).sort({ startTime: 1 })
         .then(protests => {
-            res.status(200).send({ protests: protests });
+            res.status(200).json({ protests: protests });
         })
         .catch(err => {
             console.log(err);

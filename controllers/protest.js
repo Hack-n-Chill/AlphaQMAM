@@ -20,7 +20,7 @@ exports.update = (req, res, next) => {
     }).then(result => {
         res.status(200).send({ msg: "Update added" });
     }).catch(err => {
-        console.log(err);
+        res.status(500).send('Internal server error');
     });
 };
 
@@ -52,7 +52,7 @@ exports.getProtest = (req, res, next) => {
                     res.status(200).json({ protest: protest, protestupdates: protestupdates, signedup: signedup, present: present, status: status });
                 });
         }).catch(err => {
-            console.log(err);
+            res.status(500).send('Internal server error');
         });
 };
 
@@ -71,7 +71,7 @@ exports.signupProtest = (req, res, next) => {
             });
         });
     }).catch(err => {
-        console.log(err);
+        res.status(500).send('Internal server error');
     });
 };
 
@@ -85,7 +85,7 @@ exports.presentProtest = (req, res, next) => {
             res.status(200).send({ msg: "Thank You For Being There" });
         });
     }).catch(err => {
-        console.log(err);
+        res.status(500).send('Internal server error');
     });
 };
 

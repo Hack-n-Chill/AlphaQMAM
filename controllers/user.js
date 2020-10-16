@@ -37,7 +37,7 @@ exports.createProtest = (req, res, next) => {
             });
         });
     }).catch(err => {
-        console.log(err);
+        res.status(500).send('Internal server error');
     });
 };
 
@@ -52,10 +52,10 @@ exports.myProtests = (req, res, next) => {
             return Protest.findById(elem.protest_id);
         });
         Promise.all(allProtests).then(result => {
-            res.status(200).send({ Protests: result });
+            res.status(200).json({ Protests: result });
         });
     }).catch(err => {
-        console.log(err);
+        res.status(500).send('Internal server error');
     });
 };
 
