@@ -18,7 +18,7 @@ const Updates = (props) => {
         e.preventDefault();
         //console.log(title, update);
         setError("");
-        fetch('http://localhost:5000/addUpdate/' + props.protestId, {
+        fetch('http://localhost:5000/protest/addUpdate/' + props.protestId, {
             method: 'POST',
             headers: {
                 Authorization: 'Bearer ' + auth.token,

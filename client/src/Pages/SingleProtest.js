@@ -27,7 +27,8 @@ const SingleProtest = () => {
     useEffect(() => {
         //get single Protest
         console.log(protestId);
-        fetch('http://localhost:5000/protest/' + protestId, {
+        setError(false);
+        fetch('http://localhost:5000/protest/singleProtest/' + protestId, {
             headers: {
                 Authorization: 'Bearer ' + auth.token
             }
@@ -39,27 +40,32 @@ const SingleProtest = () => {
                 if (resData.status === 500) {
                     return setError(true);
                 }
-                setProtest({ protest: resData.protest });
+                setProtest(resData.protest);
                 setSignup(resData.signedup);
                 setPresent(resData.present);
                 setStatus(resData.status);
-                setUpdates({ updates: resData.protestupdates });
-                setsCount(resData.protest.signedupUser.length());
-                setpCount(resData.protest.presentUser.length());
+                setUpdates(resData.protestupdates);
+                setsCount(resData.protest.signedupUser.length);
+                setpCount(resData.protest.presentUser.length);
                 dispatch({ type: CHANGE_LOADING_SP });
             })
             .catch(err => {
+                console.log(err);
                 setError(true);
                 dispatch({ type: CHANGE_LOADING_SP });
 
             });
 
-    }, [protestId]);
+    }, []);
 
     const changeSignup = (val) => {
         setSignup(val);
         setsCount(sCount + 1);
-        fetch('http://localhost:5000/signup/' + protestId)
+        fetch('http://localhost:5000/protest/signup/' + protestId, {
+            headers: {
+                Authorization: 'Bearer ' + auth.token
+            }
+        })
             .then(res => {
 
             })
@@ -72,29 +78,34 @@ const SingleProtest = () => {
     const changePresent = (val) => {
         if (!signup) {
             setSignup(true);
-            setsCount(sCount + 1);
-            fetch('http://localhost:5000/signup/' + protestId)
+            fetch('http://localhost:5000/protest/signup/' + protestId, {
+                headers: {
+                    Authorization: 'Bearer ' + auth.token
+                }
+            })
                 .then(res => {
-
+                    setsCount(sCount + 1);
                 })
                 .catch(err => {
                     setError(true);
-                    setsCount(sCount - 1);
                 });
 
 
         }
         setPresent(true);
-        setpCount(pCount + 1);
-        fetch('http://localhost:5000/present/' + protestId)
+        fetch('http://localhost:5000/protest/present/' + protestId, {
+            headers: {
+                Authorization: 'Bearer ' + auth.token
+            }
+        })
             .then(res => {
                 localStorage.setItem('protestId', protestId);
                 localStorage.setItem('present', true);
+                setpCount(pCount + 1);
+
             })
             .catch(err => {
                 setError(true);
-                setpCount(pCount - 1);
-
             });
 
     };

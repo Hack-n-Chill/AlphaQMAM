@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styles from "./Protestform.module.css";
-
+import { useSelector } from 'react-redux';
 import moment from "moment";
 import "react-datetime/css/react-datetime.css";
 import Datetime from 'react-datetime';
+import { useHistory } from 'react-router-dom';
 
 const Protestform = () => {
   const [organisation, setOrganisationName] = useState();
@@ -14,6 +15,10 @@ const Protestform = () => {
   const [location, setLocation] = useState();
   const [sTime, setStartTime] = useState('');
   const [eTime, setEndTime] = useState();
+  const auth = useSelector(state => state.auth);
+
+  const history = useHistory();
+
 
 
   const handleSubmit = (e) => {
@@ -21,23 +26,18 @@ const Protestform = () => {
     var endTime = endDate + " " + eTime;
     const protestDetails = { organisation, title, location, description, startTime, endTime };
     e.preventDefault();
-    console.log(protestDetails);
-    fetch('http://localhost:5000/createprotest', {
+    fetch('http://localhost:5000/user/createprotest', {
       method: "POST",
       body: JSON.stringify(protestDetails),
       headers: {
+        Authorization: 'Bearer ' + auth.token,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
     }).then(
       (response) => (response.json())
     ).then((response) => {
-      if (response.status === 'success') {
-        alert("Message Sent.");
-        this.resetForm();
-      } else if (response.status === 'fail') {
-        alert("Message failed to send.");
-      }
+      history.replace('/');
     });
   };
   return (
@@ -93,7 +93,7 @@ const Protestform = () => {
           <div className="row">
             <div className="input-field col s12">
               {/* taking date input  */}
-              <Datetime timeFormat={false} className="validate"
+              <Datetime timeFormat={false} closeOnClickOutside={false} closeOnSelect={true} className="validate"
                 onChange={(selectedDate) => setStartDate(moment(selectedDate).format("YYYY-MM-DD"))} />
               {(!startDate) &&
                 <label className="labl" htmlFor="startDate"> Start Date</label>
@@ -113,17 +113,7 @@ const Protestform = () => {
           <div className="row">
             <div className="input-field col s12">
               {/* taking date input  */}
-              <Datetime dateFormat={false}
-                onChange={(selectedTime) => setEndTime(moment(selectedTime).format("H:mm:ss "))} />
-              {(!eTime) &&
-                <label htmlFor="endTime">End Time</label>
-              }
-            </div>
-          </div>
-          <div className="row">
-            <div className="input-field col s12">
-              {/* taking date input  */}
-              <Datetime timeFormat={false}
+              <Datetime closeOnClickOutside={false} closeOnSelect={true} timeFormat={false}
                 onChange={(selectedDate) => setEndDate(moment(selectedDate).format("YYYY-MM-DD"))} />
               {(!endDate) &&
 
@@ -131,6 +121,17 @@ const Protestform = () => {
               }
             </div>
           </div>
+          <div className="row">
+            <div className="input-field col s12">
+              {/* taking date input  */}
+              <Datetime dateFormat={false}
+                onChange={(selectedTime) => setEndTime(moment(selectedTime).format("H:mm:ss "))} />
+              {(!eTime) &&
+                <label htmlFor="endTime">End Time</label>
+              }
+            </div>
+          </div>
+
           <div className="row">
             <div className="input-field col s12">
               {/* taking location input  */}

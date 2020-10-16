@@ -22,11 +22,9 @@ const Description = (props) => {
                             <p>{props.protest.description}</p>
                             <br />
                             <p>{props.protest.organisation}   |   SignupCount-{props.sCount}  |  PresentCount-{props.pCount}</p><br />
-                            <p>Start-Time:{props.proptest.startTime}</p><br />
+                            <p>Start-Time:{props.protest.startTime}</p><br />
                             <p>End-Time:{props.protest.endTime}</p>
-
-                                MAp
-                            </div>
+                        </div>
 
                         <div className="card-action">
                             {(props.signup || props.status === 'Closed') ?

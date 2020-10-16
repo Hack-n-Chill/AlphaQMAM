@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import M from 'materialize-css';
 import styles from './Register.module.css';
-
+import { useHistory } from 'react-router-dom';
 
 
 const Register = () => {
@@ -9,6 +9,7 @@ const Register = () => {
     const [email_id, setEmail] = useState();
     const [password, setPassword] = useState();
     const [number, setNumber] = useState();
+    const history = useHistory();
 
     const signUpDetails = { name, email_id, password, number };
 
@@ -31,12 +32,7 @@ const Register = () => {
         }).then(
             (response) => (response.json())
         ).then((response) => {
-            if (response.status === 'success') {
-                alert("Message Sent.");
-                this.resetForm();
-            } else if (response.status === 'fail') {
-                alert("Message failed to send.");
-            }
+            history.replace('/login');
         });
 
     };

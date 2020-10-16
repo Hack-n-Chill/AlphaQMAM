@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 
 import { CHANGE_LOGIN_STATUS } from '../../Actions/Types';
 import styles from './Login.module.css';
-import { set } from 'mongoose';
 
 
 const Login = () => {
@@ -14,12 +13,11 @@ const Login = () => {
     const [emailErr, setEmailErr] = useState(false);
     const [passwordErr, setPasswordErr] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const [formEnabled, setformEnabled] = useState(true);
+    let formEnabled = true;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
     const location = useLocation();
-
     // {
     //     if (location.state.from) {
     //         setLoginMessage("Login to continue or Signup");
@@ -32,10 +30,11 @@ const Login = () => {
     const loginHandler = (e) => {
         e.preventDefault();
 
-
         if (!formEnabled) return;
+        console.log(formEnabled);
 
-        setformEnabled(false);
+        formEnabled = false;
+        console.log(formEnabled);
         setEmailErr(false);
         setPasswordErr(false);
         setErrorMessage("");
@@ -46,56 +45,59 @@ const Login = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: email,
+                email_id: email,
                 password: password
             })
         })
             .then(res => {
-                if (res.status === 401) {
-                    setPasswordErr(true);
-                    setformEnabled(true);
-                    setErrorMessage("password incorect");
-
-                }
-                else if (res.status === 404) {
+                console.log(res);
+                if (res.status === 404) {
                     setEmailErr(true);
-                    setformEnabled(true);
+                    formEnabled = (true);
                     setErrorMessage("email does not exist");
 
                 }
+                else if (res.status === 401) {
+                    setPasswordErr(true);
+                    formEnabled = true;
+                    setErrorMessage("password incorect");
+
+                }
+
                 else if (res.status === 400) {
-                    setformEnabled(true);
+                    formEnabled = true;
                     setErrorMessage("error while validating");
                 }
                 else if (res.status === 500) {
-                    setformEnabled(true);
+                    formEnabled = true;
                     setErrorMessage("Server Error");
                 }
                 return res.json();
 
             })
             .then(resData => {
+                console.log(resData);
+                console.log(password);
                 if (formEnabled) return;
-
                 dispatch({
                     type: CHANGE_LOGIN_STATUS,
                     payload: {
                         isAuth: true,
                         token: resData.token,
-                        userId: resData.user.userId,
-                        userName: resData.user.userName
+                        userId: resData.userId,
+                        userName: resData.username
                     }
                 });
                 localStorage.setItem('token', resData.token);
                 localStorage.setItem('isAuth', true);
-                localStorage.setItem('userId', resData.user.userId);
-                localStorage.setItem('userName', resData.user.userName);
+                localStorage.setItem('userId', resData.userId);
+                localStorage.setItem('userName', resData.username);
                 history.replace(prevPath);
 
             })
             .catch(err => {
-                setformEnabled(true);
-                setErrorMessage("Server Error try after sometime");
+                formEnabled = true;
+                console.log(err);
                 dispatch({
                     type: CHANGE_LOGIN_STATUS,
                     payload: {

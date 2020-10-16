@@ -6,19 +6,19 @@ const Protest = () => {
 
 
     //Protest info
-    const [protests, setProtests] = useState(null);
+    const [protests, setProtests] = useState([]);
     const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
         // Getting info about all protests
-        fetch('URL')
+        fetch('http://localhost:5000/all-protests')
             .then(res => {
+                setLoading(false);
                 return res.json();
             })
             .then(resData => {
-                setProtests({ protests: resData.protests });
-                setLoading(false);
+                setProtests(resData.protests);
             })
             .catch(err => {
                 //error in retrieving data
@@ -34,7 +34,7 @@ const Protest = () => {
     return (
         <Fragment>
 
-            {loading && (
+            {loading ? (
                 <div style={{ marginLeft: '43%', marginTop: '17%' }} className="preloader-wrapper big active">
                     <div className="spinner-layer spinner-blue-only">
                         <div className="circle-clipper left">
@@ -46,31 +46,31 @@ const Protest = () => {
                         </div>
                     </div>
                 </div>
-            )}
-            {!loading && (
-                <div>
-                    {protests.map(protest => {
-                        return (
+            ) :
+                (
+                    <div>
+                        {console.log("hello")}
+                        {protests.map(protest => {
 
-                            <div className="row">
-                                <h1 style={{ marginLeft: '45%', marginBottom: '5%' }}>Raise Your Voice and Awareness</h1>
-                                <div className="col s12 offset-m3 m6">
-                                    <div className="card blue-grey darken-1">
-                                        <div className="card-content white-text">
-                                            <span className="card-title">{protest.Title}</span>
-                                            <p>{protest.description}</p>
-                                        </div>
-                                        <div className="card-action">
-                                            <Link to={`/lists/${protest._id}`} >Know More</Link>
-
+                            return (
+                                <div key={protest._id} className="row">
+                                    <h1 style={{ marginLeft: '45%', marginBottom: '5%' }}>Raise Your Voice and Awareness</h1>
+                                    <div className="col s12 offset-m3 m6">
+                                        <div className="card blue-grey darken-1">
+                                            <div className="card-content white-text">
+                                                <span className="card-title">{protest.title}</span>
+                                                <p>{protest.description}</p>
+                                            </div>
+                                            <div className="card-action">
+                                                <Link to={`/protest/${protest._id}`} >Know More</Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })}
-                </div>
-            )}
+                            );
+                        })}
+                    </div>
+                )}
         </Fragment>
 
 

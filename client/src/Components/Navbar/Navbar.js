@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import M from 'materialize-css';
 
 
 const Navbar = () => {
     const isAuth = useSelector(state => state.auth.isAuth);
+    const userId = useSelector(state => state.auth.userId);
     const present = localStorage.getItem('present') || false;
     const protestId = localStorage.getItem('protestId') || null;
+    const history = useHistory();
     useEffect(() => {
         var elems = document.querySelectorAll('.sidenav');
         M.Sidenav.init(elems);
@@ -20,12 +22,13 @@ const Navbar = () => {
         localStorage.removeItem('protestId');
         localStorage.removeItem('userId');
         localStorage.removeItem('userName');
+        history.replace('/');
     };
     return (
         <div>
             <nav>
                 <div className="nav-wrapper white">
-                    <a href="/" className="brand-logo"><span style={{ color: 'black', marginLeft: '5px' }}>Codemon</span></a>
+                    <a href="/" className="brand-logo"><span style={{ color: 'black', marginLeft: '5px' }}>Safe Protests</span></a>
                     <a href="/" data-target="mobile-demo" className="sidenav-trigger "><i className="material-icons"><span style={{ color: 'black' }}>menu</span></i></a>
                     <ul className="right hide-on-med-and-down">
                         {/* Help Button  */}
@@ -37,7 +40,7 @@ const Navbar = () => {
                         {/* Signed-up protests */}
                         {isAuth && (
 
-                            <li><Link to="/protests/:userId"><span style={{ color: 'black' }}>My Protests</span></Link></li>
+                            <li><Link to={`/protest/${userId}`}><span style={{ color: 'black' }}>My Protests</span></Link></li>
 
                         )}
 
@@ -63,7 +66,7 @@ const Navbar = () => {
                         {/* Logout users */}
                         {isAuth && (
 
-                            <li><Link to="/logout"><span style={{ color: 'black' }}>Logout</span></Link></li>
+                            <li><Link onClick={logoutHandler}><span style={{ color: 'black' }}>Logout</span></Link></li>
                         )}
                     </ul>
                 </div>
@@ -73,7 +76,7 @@ const Navbar = () => {
                 <li><Link to="/all-protests">All Protests</Link></li>
                 {isAuth && (
 
-                    <li><Link to="/protest/:userId">My Protests</Link></li>
+                    <li><Link to={`/protest/${userId}`}>My Protests</Link></li>
                 )}
                 {!isAuth && (
 
@@ -89,7 +92,7 @@ const Navbar = () => {
                 )}
                 {isAuth && (
 
-                    <li><Link to="/logout"><span style={{ color: 'black' }}>Logout</span></Link></li>
+                    <li><Link onClick={logoutHandler} ><span style={{ color: 'black' }}>Logout</span></Link></li>
                 )}
 
             </ul>
