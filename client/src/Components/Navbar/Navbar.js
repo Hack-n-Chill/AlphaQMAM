@@ -8,7 +8,14 @@ const Navbar = () => {
         M.Sidenav.init(elems);
 
     }, []);
-
+    logoutHandler = () => {
+        localStorage.removeItem('present');
+        localStorage.removeItem('isAuth');
+        localStorage.removeItem('token');
+        localStorage.removeItem('protestId');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userName');
+      };
     return (
         <div>
             <nav>
@@ -43,9 +50,9 @@ const Navbar = () => {
                 <li><Link to="/all-protests">All Protests</Link></li>
                 <li><Link to="/protest/:userId">All Protests</Link></li>
                 <li><Link to="/login">Login</Link></li>
-                <li><Link to="/signup">Signup</Link></li>
-                <li><Link to="/register">Create</Link></li>
-                <li><Link to="/logout"><span style={{ color: 'black' }}>Logout</span></Link></li>
+                <li><Link to="/register">Register</Link></li>
+                <li><Link to="/dashboard"><span style={{ color: 'black' }}>Dashboard</span></Link></li>
+                <li><Link to="/logout" onClick={logoutHandler}><span style={{ color: 'black' }}>Logout</span></Link></li>
 
             </ul>
         </div>
