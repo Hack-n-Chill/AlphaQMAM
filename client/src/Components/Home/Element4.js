@@ -8,8 +8,8 @@ const Element4 = () => {
         <div>
             <div className=" Element4 container-fluid row">
                 <div className="col s12 l6">
-                    <h2 className="Heading4"><span className="title">Coding is learned with practice.</span><br />And videos. And blogs.</h2>
-                    <p className="text4">We focus on things that really work and bring them to you, clearing away all the internet clutter from you. Watch the best courses, learn from your mistakes while practicing, and read about technology a lot.
+                    <h2 className="Heading4"><span className="title">Keep a check on all the protests.</span><br />All around the globe</h2>
+                    <p className="text4">Do not stop supporting the right.Be present as and when possible.Check out all the protests around the world and support the ones your conscience agree with. Keep supporting.It is important.
                 </p>
                     <br />
                     <div className="position4">

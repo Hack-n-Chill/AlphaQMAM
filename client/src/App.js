@@ -10,7 +10,7 @@ import AllProtest from './Pages/AllProtest';
 import Protestform from "./Components/Auth/Protestform";
 import SingleProtest from './Pages/SingleProtest';
 import PrivateRoute from './Components/PrivateRoute';
-
+import MyProtest from './Components/AllProtest/MyProtest';
 
 function App() {
   return (
@@ -34,7 +34,9 @@ function App() {
         <PrivateRoute exact path="/protest/:protestId">
           <SingleProtest />
         </PrivateRoute>
-
+        <PrivateRoute exact path="/myprotest/:userId">
+          < MyProtest />
+        </PrivateRoute>
 
         <Route component={Error} />
 

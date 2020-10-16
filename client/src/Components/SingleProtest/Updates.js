@@ -47,63 +47,68 @@ const Updates = (props) => {
     };
 
     return (
+
         <Fragment>
-
-
-            <div className="container" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
-                <h4>Updates</h4>
-                {!showForm && (
-                    <Link onClick={() => setShowForm(true)} style={{ alignItems: 'right' }}>+ Add Update</Link>
-
-                )}
-                {errorMessage && (
-                    <h6 className="container center">{errorMessage}</h6>
-                )}
-                {showForm && (
-                    <form onSubmit={updateHandler} className="col s12 m8 l6 offset-m3 offset-l3">
-                        <div className="row">
-                            <div className="input-field col s12">
-                                <input
-                                    name="title"
-                                    type="text"
-                                    className="validate"
-                                    onChange={e => {
-                                        setTitle(e.target.value);
-                                    }}
-                                    value={title}
-                                />
-                                <label>Title</label>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="input-field col s12">
-                                <textarea
-                                    name="Update"
-                                    className="materialize-textarea"
-                                    onChange={e => {
-                                        setUpdate(e.target.value);
-                                    }}
-                                    value={update}
-                                ></textarea>
-                                <label>Add Update</label>
-                            </div>
-                        </div>
-                        <button className={styles.btn} type="submit" >Update</button>
-                        <button className={styles.btnc} onClick={e => setShowForm(false)} >Close</button>
-
-                    </form>
-                )}
-            </div>
-            {props.updates.map(upd => {
-                return (
+            {props.updates !== null ?
+                <div>
                     <div className="container" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
-                        <h5>{upd.title}</h5>
-                        <p>{upd.description}</p>
-                        <h6>{upd.username}</h6>
-                        <hr />
+                        <h4>Updates</h4>
+                        {!showForm && (
+                            <Link onClick={() => setShowForm(true)} style={{ alignItems: 'right' }}>+ Add Update</Link>
+
+                        )}
+                        {errorMessage && (
+                            <h6 className="container center">{errorMessage}</h6>
+                        )}
+                        {showForm && (
+                            <form onSubmit={updateHandler} className="col s12 m8 l6 offset-m3 offset-l3">
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <input
+                                            name="title"
+                                            type="text"
+                                            className="validate"
+                                            onChange={e => {
+                                                setTitle(e.target.value);
+                                            }}
+                                            value={title}
+                                        />
+                                        <label>Title</label>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <textarea
+                                            name="Update"
+                                            className="materialize-textarea"
+                                            onChange={e => {
+                                                setUpdate(e.target.value);
+                                            }}
+                                            value={update}
+                                        ></textarea>
+                                        <label>Add Update</label>
+                                    </div>
+                                </div>
+                                <button className={styles.btn} type="submit" >Update</button>
+                                <button className={styles.btnc} onClick={e => setShowForm(false)} >Close</button>
+
+                            </form>
+                        )}
                     </div>
-                );
-            })}
+                    {props.updates.map(upd => {
+                        return (
+                            <div className="container" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
+                                <h5>{upd.title}</h5>
+                                <p>{upd.description}</p>
+                                <h6>{upd.username}</h6>
+                                <hr />
+                            </div>
+                        );
+                    })}
+                </div>
+                : <div></div>
+            }
+
 
         </Fragment>
     );

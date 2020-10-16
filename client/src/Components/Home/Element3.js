@@ -9,9 +9,8 @@ const Element3 = () => {
             <div className="container-fluid">
                 <div style={{ marginBottom: '0' }} className={`row ${styles.x}`}>
                     <div className="col s12 m6 l6">
-                        <h2 className={styles.h2}>For you and for your Rights! </h2>
-                        <p className={styles.p}>We agonize over the right ways for people to learn programming and work together as developers so you can focus on just your skills</p>
-                        <button className={styles.btn}>Start Learning</button>
+                        <h2 className={styles.h2}>For You And For Your Rights! </h2>
+                        <p className={styles.p}>We want people to keep fighting for the right. We want people to be safe. So we merge the two and bring you this! A safer way to carry on your fight against the wrong with greater real-time accessibilities and collaborative work. </p>
                     </div>
                     <div className="col s12 m6 l6">
                         <img className="fit" src={Binary} alt="Element3" style={{ marginLeft: '30px', marginTop: '18%' }} />

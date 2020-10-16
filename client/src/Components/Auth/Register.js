@@ -39,7 +39,7 @@ const Register = () => {
     return (
         <div className="container-fluid center">
             <div className="row" style={{ paddingLeft: '20%', paddingRight: '20%' }}>
-                <h1>Register</h1>
+                <h1>SignUp</h1>
                 <form onSubmit={handleSubmit}
                     className="col s12 m8 l6 offset-m3 offset-l3">
                     <div className="row">

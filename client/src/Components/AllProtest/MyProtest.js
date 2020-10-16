@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Protest = () => {
 
@@ -8,17 +8,23 @@ const Protest = () => {
     //Protest info
     const [protests, setProtests] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { userId } = useParams();
+    const auth = useSelector(state => state.auth);
 
 
     useEffect(() => {
         // Getting info about all protests
-        fetch('http://localhost:5000/all-protests')
+        fetch('http://localhost:5000/user/myprotests/' + userId, {
+            headers: {
+                Authorization: 'Bearer ' + auth.token
+            }
+        })
             .then(res => {
                 setLoading(false);
                 return res.json();
             })
             .then(resData => {
-                setProtests(resData.protests);
+                setProtests(resData.Protests);
             })
             .catch(err => {
                 //error in retrieving data

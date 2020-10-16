@@ -147,13 +147,14 @@ const SingleProtest = () => {
                                     changeSignup={changeSignup}
                                     changePresent={changePresent}
                                 />
+
                                 {(signup || status === 'Closed') ?
 
                                     <Updates
                                         updates={updates}
                                         protestId={protestId}
                                     /> :
-                                    <h5 className="container center">Signup to get Updates</h5>
+                                    (protest !== null) ? <h5 className="container center">Signup to get Updates</h5> : <div></div>
                                 }
                             </div>
                     }
