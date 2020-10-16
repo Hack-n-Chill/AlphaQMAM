@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import M from 'materialize-css';
 
+import { CHANGE_LOGIN_STATUS } from '../../Actions/Types';
+
 
 const Navbar = () => {
+    const dispatch = useDispatch();
     const isAuth = useSelector(state => state.auth.isAuth);
     const userId = useSelector(state => state.auth.userId);
     const present = localStorage.getItem('present') || false;
@@ -16,6 +19,16 @@ const Navbar = () => {
 
     }, []);
     const logoutHandler = () => {
+        dispatch({
+            type: CHANGE_LOGIN_STATUS,
+            payload: {
+                isAuth: false,
+                token: null,
+                userId: null,
+                userName: ''
+            }
+
+        });
         localStorage.removeItem('present');
         localStorage.removeItem('isAuth');
         localStorage.removeItem('token');
