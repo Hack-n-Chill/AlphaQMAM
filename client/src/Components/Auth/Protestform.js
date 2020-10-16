@@ -4,7 +4,7 @@ import styles from "./Protestform.module.css";
 import moment from "moment";
 import "react-datetime/css/react-datetime.css";
 import Datetime from 'react-datetime';
- 
+
 const Protestform = () => {
   const [organisation, setOrganisationName] = useState();
   const [title, setTitle] = useState();
@@ -12,34 +12,34 @@ const Protestform = () => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [location, setLocation] = useState();
-  const [sTime,setStartTime]=useState('');
-  const [eTime,setEndTime]=useState();
-  
-  
-  const handleSubmit = (e)=> {
-    var startTime=startDate+" "+sTime;
-    var endTime=endDate+" "+eTime;
-    const protestDetails = { organisation,  title, location, description ,startTime,endTime};
-      e.preventDefault();
-      console.log(protestDetails);
-      fetch('http://localhost:5000/createprotest', {
-        method: "POST",
-        body: JSON.stringify(protestDetails),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-      }).then(
+  const [sTime, setStartTime] = useState('');
+  const [eTime, setEndTime] = useState();
+
+
+  const handleSubmit = (e) => {
+    var startTime = startDate + " " + sTime;
+    var endTime = endDate + " " + eTime;
+    const protestDetails = { organisation, title, location, description, startTime, endTime };
+    e.preventDefault();
+    console.log(protestDetails);
+    fetch('http://localhost:5000/createprotest', {
+      method: "POST",
+      body: JSON.stringify(protestDetails),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    }).then(
       (response) => (response.json())
-        ).then((response)=> {
+    ).then((response) => {
       if (response.status === 'success') {
-        alert("Message Sent."); 
-        this.resetForm()
-      } else if(response.status === 'fail') {
-        alert("Message failed to send.")
+        alert("Message Sent.");
+        this.resetForm();
+      } else if (response.status === 'fail') {
+        alert("Message failed to send.");
       }
-    })
-  }
+    });
+  };
   return (
     <div className="container-fluid center">
       <div className="row" style={{ paddingLeft: "20%", paddingRight: "20%" }}>
@@ -53,7 +53,7 @@ const Protestform = () => {
               {/* taking organisation name  input  */}
               <input
                 name="organisationName"
-                value={organisation ||''}
+                value={organisation || ''}
                 onChange={(e) => setOrganisationName(e.target.value)}
                 type="text"
                 className="validate"
@@ -68,7 +68,7 @@ const Protestform = () => {
               <input
                 name="title"
                 type="text"
-                value={title ||''}
+                value={title || ''}
                 onChange={(e) => setTitle(e.target.value)}
                 className="validate"
                 required
@@ -82,7 +82,7 @@ const Protestform = () => {
               <input
                 name="description"
                 type="text"
-                value={description ||''}
+                value={description || ''}
                 onChange={(e) => setDescription(e.target.value)}
                 className="validate"
                 required
@@ -93,41 +93,41 @@ const Protestform = () => {
           <div className="row">
             <div className="input-field col s12">
               {/* taking date input  */}
-              <Datetime   timeFormat={false} className="validate"
-              onChange={(selectedDate)=>setStartDate(moment(selectedDate).format("YYYY-MM-DD"))} />
-              { (!startDate) &&
-              <label className="labl" htmlFor="startDate"> Start Date</label>
-              }                
+              <Datetime timeFormat={false} className="validate"
+                onChange={(selectedDate) => setStartDate(moment(selectedDate).format("YYYY-MM-DD"))} />
+              {(!startDate) &&
+                <label className="labl" htmlFor="startDate"> Start Date</label>
+              }
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
               {/* taking start time input  */}
-              <Datetime  dateFormat={false} 
-              onChange={(selectedTime)=>setStartTime(moment(selectedTime).format("H:mm:ss "))} />
-              { (!sTime) &&
-              <label htmlFor="startTime">Start Time</label>
+              <Datetime dateFormat={false}
+                onChange={(selectedTime) => setStartTime(moment(selectedTime).format("H:mm:ss "))} />
+              {(!sTime) &&
+                <label htmlFor="startTime">Start Time</label>
               }
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
               {/* taking date input  */}
-              <Datetime  dateFormat={false} 
-              onChange={(selectedTime)=>setEndTime(moment(selectedTime).format("H:mm:ss "))} />
-              { (!eTime) &&
-              <label htmlFor="endTime">End Time</label>
-              } 
+              <Datetime dateFormat={false}
+                onChange={(selectedTime) => setEndTime(moment(selectedTime).format("H:mm:ss "))} />
+              {(!eTime) &&
+                <label htmlFor="endTime">End Time</label>
+              }
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
               {/* taking date input  */}
-              <Datetime  timeFormat={false} 
-              onChange={(selectedDate)=>setEndDate(moment(selectedDate).format("YYYY-MM-DD"))} />
+              <Datetime timeFormat={false}
+                onChange={(selectedDate) => setEndDate(moment(selectedDate).format("YYYY-MM-DD"))} />
               {(!endDate) &&
 
-                 <label htmlFor="endDate">End Date</label>
+                <label htmlFor="endDate">End Date</label>
               }
             </div>
           </div>
@@ -137,7 +137,7 @@ const Protestform = () => {
               <input
                 type="text"
                 name="location"
-                value={location ||''}
+                value={location || ''}
                 onChange={(e) => setLocation(e.target.value)}
                 className="validate"
                 required
