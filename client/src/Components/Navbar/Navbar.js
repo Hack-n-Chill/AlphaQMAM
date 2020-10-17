@@ -6,10 +6,6 @@ import M from 'materialize-css';
 import { CHANGE_LOGIN_STATUS } from '../../Actions/Types';
 import styles from './Navbar.module.css';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> fccc444d27d355e8d4bbfed9e4fe1e1db362d940
 
 
 const Navbar = () => {
@@ -31,11 +27,7 @@ const Navbar = () => {
     const helptHndler = () => {
         fetch('http://localhost:5000/help/twilio/' + protestId, {
             headers: {
-<<<<<<< HEAD
-                Authorization: 'Bearer ' + token
-=======
                 Authorization: 'Bearer ' + token,
->>>>>>> fccc444d27d355e8d4bbfed9e4fe1e1db362d940
             }
         })
             .then(res => {
