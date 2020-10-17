@@ -1,6 +1,6 @@
 import React from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
-import Binary from "../../Images/Binary.jpg";
+import Binary from "../../Images/Binary1.jpg";
 import "./Element4.css";
 
 const Element4 = () => {
