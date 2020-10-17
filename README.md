@@ -2,7 +2,7 @@
 
 ![Logo](https://www.freelogoservices.com/api/main/images/1j+ojFVDOMkX9Wytexe43D6kifCEqxVInxjIwXs1M3EMoAJtliAvj...Ro8...wy "Optional title")
 
-## What inspired you to make this product?
+## What inspired us to make this product?
 
 1) We were inspired by the recent BLM protests around the world after the death of George Floyd at the hand of a police officer. We wanted to create a web app that was able to help citizens safely practice their right to free speech and protest.
 2) Another factor that inspired us was our college,Jadavpur University, itself. Standing against everything wrong from the very beginning, we believe there should be a safer way which allows them to support their cause. Recent turmoil of events had left us devastated and many were injured. We believe a quicker approach of sending just and verified updates would have helped the cause in a great way.
@@ -15,9 +15,9 @@ We built our product using the MERN stack (MongoDB, Express, React and Node.js),
 
 ## Implementation
 
-1) SignedUp and Logged in users can create a protest. People supporting the same agenda can club together toraise their voices and see the live updates and location. Protest organisers will be allowed to add other trusthworthy admins to maintain the conduct and norms.
-2) Protests will be categorised into 'Active" , 'Closed" and "Opens soon" based on time slots. We maintain two different counts of users: (i) Supporters (ii) Present to measure the strngth and rightness of the protest.
-3) Admins and Creators of the protest can add live updates,they feel are publicly displayable. A supporter, if willig to add an update, will have his update posted only after it gets verified by the respective protests' admins. If malicious intents are encountered, he shall be reported and blocked. 
+1) SignedUp and Logged in users can create a protest. People supporting the same agenda can club together to raise their voices and see the live updates and location. Protest organisers will be allowed to add other trusthworthy admins to maintain the conduct and norms.
+2) Protests will be categorised into 'Active" , 'Closed" and "Opens soon" based on time slots. We maintain two different counts of users: (i) Supporters (ii) Present to measure the strength and rightness of the protest.
+3) Admins and Creators of the protest can add live updates,they feel are publicly displayable. A supporter, if willing to add an update, will have his update posted only after it gets verified by the respective protests' admins. If malicious intents are encountered, he shall be reported and blocked. 
 4) If a supporter finds himself in trouble, he can access the 'HELP' button provided, which on being clicked shall send messages to all the supporters presnt in the respecive protest with a link to his location. Help,definitely will be reached soon!
 5) The app provides a page with information pertaining to users' legal rights during protest. The app also provides a list of common tips so that the user can protest safely.
 
