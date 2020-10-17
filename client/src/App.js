@@ -11,6 +11,8 @@ import Protestform from "./Components/Auth/Protestform";
 import SingleProtest from './Pages/SingleProtest';
 import PrivateRoute from './Components/PrivateRoute';
 import MyProtest from './Components/AllProtest/MyProtest';
+import Faq from './Components/knowYourProtest/knowYourProtest';
+import VerifyUpd from './Pages/VerifyUpd';
 
 function App() {
   return (
@@ -21,6 +23,9 @@ function App() {
         <Route exact path="/" component={Home} />
 
         <Route exact path="/login" component={Login} />
+
+        <Route exact path="/know" component={Faq} />
+
 
         {/* k<Route exact path="/register" component={Protestform} /> */}
         <PrivateRoute exact path="/createprotest">
@@ -36,6 +41,10 @@ function App() {
         </PrivateRoute>
         <PrivateRoute exact path="/myprotest/:userId">
           < MyProtest />
+        </PrivateRoute>
+
+        <PrivateRoute exact path="/verify/:protestId">
+          <VerifyUpd />
         </PrivateRoute>
 
         <Route component={Error} />

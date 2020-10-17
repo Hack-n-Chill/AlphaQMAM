@@ -3,13 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 
-import { CHANGE_LOADING_SP } from '../Actions/Types';
+import { CHANGE_LOADING_SP, CHANGE_PRESENT_STATUS } from '../Actions/Types';
 import Description from '../Components/SingleProtest/Description';
 import Updates from '../Components/SingleProtest/Updates';
 
 
 const SingleProtest = () => {
 
+    const [user, setUser] = useState(false);
+    const [admin, setAdmin] = useState(false);
     const [protest, setProtest] = useState(null);
     const [signup, setSignup] = useState(false);
     const [updates, setUpdates] = useState(null);
@@ -18,6 +20,7 @@ const SingleProtest = () => {
     const [sCount, setsCount] = useState(0);
     const [pCount, setpCount] = useState(0);
     const [error, setError] = useState(false);
+
 
     const loading = useSelector(state => state.loading);
     const auth = useSelector(state => state.auth);
@@ -42,6 +45,8 @@ const SingleProtest = () => {
                 }
                 setProtest(resData.protest);
                 setSignup(resData.signedup);
+                setAdmin(resData.admin);
+                setUser(resData.user);
                 setPresent(resData.present);
                 setStatus(resData.status);
                 setUpdates(resData.protestupdates);
@@ -101,6 +106,13 @@ const SingleProtest = () => {
             .then(res => {
                 localStorage.setItem('protestId', protestId);
                 localStorage.setItem('present', true);
+                dispatch({
+                    type: CHANGE_PRESENT_STATUS,
+                    payload: {
+                        present: true,
+                        protestId: protestId
+                    }
+                });
                 setpCount(pCount + 1);
 
             })
@@ -144,6 +156,7 @@ const SingleProtest = () => {
                                     present={present}
                                     sCount={sCount}
                                     pCount={pCount}
+                                    user={user}
                                     changeSignup={changeSignup}
                                     changePresent={changePresent}
                                 />
@@ -153,6 +166,8 @@ const SingleProtest = () => {
                                     <Updates
                                         updates={updates}
                                         protestId={protestId}
+                                        user={user}
+                                        admin={admin}
                                     /> :
                                     (protest !== null) ? <h5 className="container center">Signup to get Updates</h5> : <div></div>
                                 }
