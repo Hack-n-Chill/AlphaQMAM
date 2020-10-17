@@ -36,6 +36,8 @@ const Updates = (props) => {
                 setShowForm(false);
                 setTitle("");
                 setUpdate("");
+                if (!props.admin)
+                    alert('Update to be verified');
 
             })
             .catch(err => {
@@ -109,7 +111,7 @@ const Updates = (props) => {
                             <div className="container" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
                                 <h5>{upd.title}</h5>
                                 <p>{upd.description}</p>
-                                <h6>{upd.username}</h6>
+                                <h6>Organizers</h6>
                                 <hr />
                             </div>
                         );

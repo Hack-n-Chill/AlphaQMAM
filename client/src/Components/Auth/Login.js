@@ -60,8 +60,12 @@ const Login = () => {
                 else if (res.status === 401) {
                     setPasswordErr(true);
                     formEnabled = true;
-                    setErrorMessage("password incorect");
+                    setErrorMessage("Password Incorrect");
 
+                }
+                else if (res.status === 402) {
+                    formEnabled = true;
+                    setErrorMessage("Not permitted");
                 }
 
                 else if (res.status === 400) {

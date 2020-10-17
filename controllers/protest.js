@@ -111,7 +111,8 @@ exports.presentProtest = (req, res, next) => {
 
 exports.addAdmin = (req, res, next) => {
     const protest_id = req.params.protestId;
-    const email_id = req.body.email_id;
+    const email_id = req.body.email;
+    console.log(email_id);
     Protest.findById(protest_id).then(protest => {
         User.find({ email_id: email_id }).then(user => {
             protest.admins.push({ user_id: user[0]._id });

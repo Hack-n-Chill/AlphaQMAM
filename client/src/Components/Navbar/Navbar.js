@@ -25,18 +25,35 @@ const Navbar = () => {
 
     }, []);
     const helptHndler = () => {
-        fetch('http://localhost:5000/help/twilio/' + protestId, {
-            headers: {
-                Authorization: 'Bearer ' + token,
-            }
-        })
-            .then(res => {
-                alert('Help message seent');
-            })
-            .catch(err => {
-                alert('error occured');
-            });
+        let latitude;
+        let longitude;
+        navigator.geolocation.getCurrentPosition(position => {
+            latitude = position.coords.latitude;
+            longitude = position.coords.longitude;
+            console.log(latitude, longitude);
+            fetch('http://localhost:5000/help/twilio/' + protestId,
+                {
+                    method: 'POST',
+                    headers: {
+                        Authorization: 'Bearer ' + token,
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        latitude: latitude,
+                        longitude: longitude
+                    })
+                })
+                .then(res => {
+                    alert('Help message sent');
+                })
+                .catch(err => {
+                    console.log(err);
+                    alert('error occured');
+                });
+        });
+
     };
+
     const logoutHandler = () => {
         dispatch({
             type: CHANGE_LOGIN_STATUS,

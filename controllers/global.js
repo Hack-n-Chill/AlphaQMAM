@@ -62,7 +62,7 @@ exports.login = (req, res, next) => {
             if (loadedUser === null)
                 return;
             if (loadedUser.blocked === true)
-                return res.status(200).send({ msg: "You are not permitted" });
+                return res.status(402).send({ msg: "You are not permitted" });
             if (!isEqual) {
                 return res.status(401).send({ msg: "Wrong Password" });
             }

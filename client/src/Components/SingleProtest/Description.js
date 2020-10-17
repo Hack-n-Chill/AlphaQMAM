@@ -23,10 +23,11 @@ const Description = (props) => {
     const mailHandler = (e) => {
         e.preventDefault();
         //console.log(email);
-        fetch('URL', {
+        fetch('http://localhost:5000/protest/admin/' + props.protest._id, {
             method: 'POST',
             headers: {
-                Authorization: 'Bearer ' + auth.token
+                Authorization: 'Bearer ' + auth.token,
+                'Content-type': 'application/json'
             },
             body: JSON.stringify({
                 email: email
@@ -83,7 +84,7 @@ const Description = (props) => {
                         <div className="col s12 offset-m2 m8">
                             <div className="card blue-grey darken-1">
                                 <div className="card-content white-text">
-                                    {props.admin && (
+                                    {props.user && (
 
                                         <div className=" right">
                                             <Link to="#modal1" className="modal-trigger" style={{ color: 'white' }}>+ Add Admin</Link>

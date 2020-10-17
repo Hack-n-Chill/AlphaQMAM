@@ -7,14 +7,14 @@ const VerifyUpd = () => {
 
     const { protestId } = useParams();
     const auth = useSelector(state => state.auth);
-    const [update, setupdate] = useState(null);
+    const [update, setupdate] = useState([]);
     const [error, seterror] = useState(false);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         //get all the pending requests
 
-        fetch('URL' + protestId, {
+        fetch('http://localhost:5000/update/pending/' + protestId, {
             headers: {
                 Authorization: 'Bearer ' + auth.token
             }
@@ -27,9 +27,12 @@ const VerifyUpd = () => {
 
             })
             .then(resData => {
+                console.log(resData);
                 setLoading(false);
                 seterror(false);
                 setupdate(resData.pending);
+                console.log(update);
+
             })
             .catch(err => {
                 setLoading(false);
@@ -39,7 +42,7 @@ const VerifyUpd = () => {
     }, []);
 
     const verifyHandler = (id) => {
-        fetch('URL' + id, {
+        fetch('http://localhost:5000/update/verify/' + id, {
             headers: {
                 Authorization: 'Bearer ' + auth.token
             }
@@ -63,7 +66,7 @@ const VerifyUpd = () => {
     };
 
     const igHandler = (id) => {
-        fetch('URL' + id, {
+        fetch('http://localhost:5000/update/ignore/' + id, {
             headers: {
                 Authorization: 'Bearer ' + auth.token
             }
@@ -88,7 +91,7 @@ const VerifyUpd = () => {
     };
 
     const reportHandler = (id) => {
-        fetch('URL' + id, {
+        fetch('http://localhost:5000/update/block/' + id, {
             headers: {
                 Authorization: 'Bearer ' + auth.token
             }
