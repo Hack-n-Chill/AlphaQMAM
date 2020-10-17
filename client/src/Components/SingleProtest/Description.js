@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import M from 'materialize-css';
-
+import Mapper from "../AllProtest/map";
 //import { CHANGE_LOADING_DESC } from '../../Actions/Types';
 
 
@@ -96,6 +96,7 @@ const Description = (props) => {
                                     <p>{props.protest.organisation}   |   SignupCount-{props.sCount}  |  PresentCount-{props.pCount}</p><br />
                                     <p>Start-Time:{props.protest.startTime}</p><br />
                                     <p>End-Time:{props.protest.endTime}</p>
+                                    <Mapper loc={props.protest.location} />
                                 </div>
 
                                 <div className="card-action">
