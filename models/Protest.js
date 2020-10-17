@@ -47,8 +47,15 @@ const ProtestSchema = new Schema({
                 ref: 'User'
             }
         }
+    ],
+    admins: [
+        {
+            user_id: {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        }
     ]
-
 });
 
 module.exports = mongoose.model('Protest', ProtestSchema);

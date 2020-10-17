@@ -1,4 +1,5 @@
 const Protest = require("../models/Protest");
+const Pending_Updates = require("../models/Pending_Updates");
 const Protest_Update = require("../models/Protest_Update");
 const User = require("../models/User");
 
@@ -10,17 +11,32 @@ exports.update = (req, res, next) => {
     const username = req.username;
     const user_id = req.userId;
     const protest_id = req.params.protestId;
-    Protest_Update.create({
-        protest_id: protest_id,
-        title: title,
-        description: description,
-        username: username,
-        user_id: user_id
-
-    }).then(result => {
-        res.status(200).send({ msg: "Update added" });
+    Protest.findById(protest_id).then(protest => {
+        let present = (protest.admins.find(o => o.user_id.toString() === user_id));
+        if (present) {
+            Protest_Update.create({
+                protest_id: protest_id,
+                title: title,
+                description: description,
+                username: username,
+                user_id: user_id
+            }).then(result => {
+                res.status(200).send({ msg: "Update added" });
+            });
+        }
+        else {
+            Pending_Updates.create({
+                protest_id: protest_id,
+                title: title,
+                description: description,
+                username: username,
+                user_id: user_id
+            }).then(result => {
+                res.status(200).send({ msg: "Update added" });
+            });
+        }
     }).catch(err => {
-        res.status(500).send('Internal server error');
+        console.log(err);
     });
 };
 
@@ -28,11 +44,9 @@ exports.update = (req, res, next) => {
 exports.getProtest = (req, res, next) => {
     const user_id = req.userId;
     const protest_id = req.params.protestId;
-    console.log(user_id);
     let status = "Active";
     Protest.findById(protest_id).then(
         protest => {
-            console.log(Date.now());
             if (Date.now() < (protest.startTime))
                 status = "Opens Soon";
             else if (Date.now() > protest.endTime)
@@ -41,6 +55,12 @@ exports.getProtest = (req, res, next) => {
                 protestupdates => {
                     let signedup = (protest.signedupUser.find(o => o.user_id.toString() === user_id));
                     let present = (protest.presentUser.find(o => o.user_id.toString() === user_id));
+                    let admin = protest.admins.find(o => o.user_id.toString() === user_id);
+                    let user = protest.createdBy.toString() === user_id;
+                    if (admin)
+                        admin = true;
+                    else
+                        admin = false;
                     if (signedup)
                         signedup = true;
                     else
@@ -49,7 +69,7 @@ exports.getProtest = (req, res, next) => {
                         present = true;
                     else
                         present = false;
-                    res.status(200).json({ protest: protest, protestupdates: protestupdates, signedup: signedup, present: present, status: status });
+                    res.status(200).json({ protest: protest, protestupdates: protestupdates, signedup: signedup, present: present, status: status, admin: admin, user: user });
                 });
         }).catch(err => {
             res.status(500).send('Internal server error');
@@ -86,6 +106,22 @@ exports.presentProtest = (req, res, next) => {
         });
     }).catch(err => {
         res.status(500).send('Internal server error');
+    });
+};
+
+exports.addAdmin = (req, res, next) => {
+    const protest_id = req.params.protestId;
+    const email_id = req.body.email_id;
+    Protest.findById(protest_id).then(protest => {
+        User.find({ email_id: email_id }).then(user => {
+            protest.admins.push({ user_id: user[0]._id });
+            protest.save().then(
+                result => {
+                    res.status(200).send({ msg: "Added as admin" });
+                });
+        });
+    }).catch(err => {
+        console.log(err);
     });
 };
 

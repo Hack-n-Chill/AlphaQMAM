@@ -49,7 +49,7 @@ exports.registerUser = (req, res, next) => {
 exports.login = (req, res, next) => {
     const email_id = req.body.email_id;
     const password = req.body.password;
-    let loadedUser;
+    let loadedUser = null;
     User.findOne({ email_id: email_id }).then(
         user => {
             if (!user) {
@@ -59,6 +59,10 @@ exports.login = (req, res, next) => {
             return bcrypt.compare(password, user.password);
         })
         .then(isEqual => {
+            if (loadedUser === null)
+                return;
+            if (loadedUser.blocked === true)
+                return res.status(200).send({ msg: "You are not permitted" });
             if (!isEqual) {
                 return res.status(401).send({ msg: "Wrong Password" });
             }
@@ -71,8 +75,9 @@ exports.login = (req, res, next) => {
                 { expiresIn: '24h' }
             );
             res.status(200).json({ token: token, userId: loadedUser._id.toString(), username: loadedUser.name });
-        }).catch(err => res.status(500).send('Internal server error'));
-    ;
+        }).catch(err => {
+            console.log(err);
+        });
 };
 //GET: To get all the protests
 exports.getProtests = (req, res, next) => {

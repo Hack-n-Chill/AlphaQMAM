@@ -29,6 +29,10 @@ const UserSchema = new Schema({
         type: Number,
         required: true,
     },
+    blocked: {
+        type: Boolean,
+        default: false
+    },
     createdProtest: [
         {
             protest_id: {

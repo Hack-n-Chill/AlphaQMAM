@@ -5,7 +5,7 @@ import M from 'materialize-css';
 
 import { CHANGE_LOGIN_STATUS } from '../../Actions/Types';
 import styles from './Navbar.module.css';
-import { TokenExpiredError } from 'jsonwebtoken';
+
 
 
 const Navbar = () => {
@@ -23,9 +23,9 @@ const Navbar = () => {
 
     }, []);
     const helptHndler = () => {
-        fetch('http://localhost:5000/help/twilio' + protestId, {
+        fetch('http://localhost:5000/help/twilio/' + protestId, {
             headers: {
-                Authorization: 'Bearer ' + TokenExpiredError
+                Authorization: 'Bearer ' + token
             }
         })
             .then(res => {

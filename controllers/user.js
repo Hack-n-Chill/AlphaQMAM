@@ -30,6 +30,7 @@ exports.createProtest = (req, res, next) => {
                 console.log(result.signedupUser);
                 result.signedupUser.push({ user_id: userId });
                 result.presentUser.push({ user_id: userId });
+                result.admins.push({ user_id: userId });
                 result.save().then(stored => {
                     console.log(result);
                     res.status(200).send({ msg: "Protest created successfully" });
