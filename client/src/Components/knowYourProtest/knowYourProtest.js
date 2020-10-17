@@ -10,7 +10,7 @@ const Faq = () => {
   return (
     <div>
       <div>
-        <h3>Know Your Rights</h3>
+        <h3 style={{ marginLeft: '20px' }}>Know Your Rights</h3>
         <ul class="collapsible popout">
           <li>
             <div class="collapsible-header" style={{ fontWeight: "bold" }}>

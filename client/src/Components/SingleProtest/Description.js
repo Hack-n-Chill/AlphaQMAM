@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
-//import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect, Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import M from 'materialize-css';
 
 //import { CHANGE_LOADING_DESC } from '../../Actions/Types';
 
@@ -9,16 +10,87 @@ const Description = (props) => {
     //Single Protest
 
 
+    useEffect(() => {
+        //effect
+
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+    }, []);
+    const auth = useSelector(state => state.auth);
+    const [email, setemail] = useState('');
+
+
+    const mailHandler = (e) => {
+        e.preventDefault();
+        //console.log(email);
+        fetch('URL', {
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + auth.token
+            },
+            body: JSON.stringify({
+                email: email
+            })
+        })
+            .then(res => {
+                if (res.status == 200 || res.status === 201) {
+
+                    return alert('Email added');
+                }
+                throw new Error;
+            })
+            .catch(err => {
+                alert('email not registered or server error');
+            });
+    };
 
     return (
         <Fragment>
+
             {
-                props.protest !== null ?
+                props.protest !== null ? <Fragment>
+
+
+                    <div id={`protest/${props.protest._id}#modal1`} className="modal">
+                        <div className="modal-content">
+                            <h4>Add email</h4>
+                            <div class="row">
+                                <form onSubmit={mailHandler} className="col s12">
+                                    <div className="row">
+                                        <div className="input-field col s6">
+                                            <input
+                                                name="email"
+                                                type="email"
+                                                className="validate"
+                                                onChange={e => { setemail(e.target.value); }}
+                                            />
+                                            <label htmlFor="email">Email</label>
+                                        </div>
+                                    </div>
+                                    <div className="modal-footer">
+                                        <a href="#!" className="modal-close waves-effect waves-red btn-flat">Close</a>
+
+                                        <button type="submit" className="modal-close waves-effect waves-green btn-flat">Submit</button>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
                     <div className="row" style={{ paddingTop: '5%' }}>
                         <div className="col s12 offset-m2 m8">
                             <div className="card blue-grey darken-1">
                                 <div className="card-content white-text">
-                                    <span className="card-title"><h1>{props.protest.title}</h1></span>
+                                    {props.admin && (
+
+                                        <div className=" right">
+                                            <Link to="#modal1" className="modal-trigger" style={{ color: 'white' }}>+ Add Admin</Link>
+                                        </div>
+                                    )}
+                                    <span className="card-title"><h1>{props.protest.title}</h1>
+                                    </span>
                                     <p>{props.protest.description}</p>
                                     <br />
                                     <p>{props.protest.organisation}   |   SignupCount-{props.sCount}  |  PresentCount-{props.pCount}</p><br />
@@ -58,6 +130,7 @@ const Description = (props) => {
                             </div>
                         </div>
                     </div>
+                </Fragment>
 
                     : <div></div>
             }
