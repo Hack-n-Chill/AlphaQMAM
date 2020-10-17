@@ -5,17 +5,20 @@ import M from 'materialize-css';
 
 import { CHANGE_LOGIN_STATUS } from '../../Actions/Types';
 import styles from './Navbar.module.css';
-import { TokenExpiredError } from 'jsonwebtoken';
+
+
 
 
 const Navbar = () => {
     const dispatch = useDispatch();
-    const isAuth = useSelector(state => state.auth.isAuth);
-    const token = useSelector(state => state.auth.token);
+    const { isAuth, token, present, protestId } = useSelector(state => state.auth);
+    //const token = useSelector(state => state.auth.token);
+
 
     const userId = useSelector(state => state.auth.userId);
-    const present = localStorage.getItem('present') || false;
-    const protestId = localStorage.getItem('protestId') || null;
+    // const present = localStorage.getItem('present') || false;
+    // const protestId = localStorage.getItem('protestId') || null;
+
     const history = useHistory();
     useEffect(() => {
         var elems = document.querySelectorAll('.sidenav');
@@ -25,7 +28,7 @@ const Navbar = () => {
     const helptHndler = () => {
         fetch('http://localhost:5000/help/twilio' + protestId, {
             headers: {
-                Authorization: 'Bearer ' + TokenExpiredError
+                Authorization: 'Bearer ' + token,
             }
         })
             .then(res => {
@@ -66,6 +69,9 @@ const Navbar = () => {
                             <li><Link><button onClick={helptHndler} className={styles.btn}>Help</button></Link> </li>
 
                         )}
+
+                        <li ><Link to="/know"><span style={{ color: 'black' }}>Know your Rights</span></Link></li>
+
 
                         {/* All protests */}
                         <li ><Link to="/all-protests"><span style={{ color: 'black' }}>All Protests</span></Link></li>
@@ -110,6 +116,8 @@ const Navbar = () => {
                     <li><button onClick={helptHndler} className={styles.btn}>Help</button> </li>
 
                 )}
+                <li ><Link to="/know"><span style={{ color: 'black' }}>Know your Rights</span></Link></li>
+
                 <li><Link to="/all-protests">All Protests</Link></li>
                 {isAuth && (
 

@@ -56,7 +56,16 @@ const Updates = (props) => {
                         {!showForm && (
                             <Link onClick={() => setShowForm(true)} style={{ alignItems: 'right' }}>+ Add Update</Link>
 
+
                         )}
+                        <br />
+                        {
+                            (props.admin || props.user) && (
+
+                                <Link to={`/verify/${props.protestId}`} style={{ alignItems: 'right' }}>Verify Updates</Link>
+                            )
+                        }
+
                         {errorMessage && (
                             <h6 className="container center">{errorMessage}</h6>
                         )}
